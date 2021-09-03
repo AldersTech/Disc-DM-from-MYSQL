@@ -40,8 +40,8 @@ $- pip3 install -r requirements.txt
 006   acmt = True
 ```
 
->  Next open the send.py and verify `line 102` the table is the correct name:
-```
+>  Next open the send.py and verify `line 102` the table is the correct name (currently ***dm_users****):
+```bash
 100  	
 101  	cursor1 = db.cursor()
 102   cursor1.execute("select * from dm_users where robot='0' ORDER BY id DESC")
@@ -50,10 +50,13 @@ $- pip3 install -r requirements.txt
 105   indx = 0  
   
 ```  
->  Next open the send.py and edit `line 102` and change if needed dm_users to the correct table name
+>  Next scroll down and edit `line 124` and swap your discord [TokenHere]:
+```
+bot.run("[TokenHere]", bot = False)TokenHere]
+```
 
 run **send.py** 
-```
+```bash
 $- python3 send.py
 ```
 
