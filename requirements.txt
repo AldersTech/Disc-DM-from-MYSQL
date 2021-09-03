@@ -1,0 +1,11 @@
+discord
+from rich
+pymysql
+config
+time
+asyncio
+random
+math
+requests 
+urllib
+json
