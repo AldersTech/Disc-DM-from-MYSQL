@@ -4,3 +4,5 @@ pswd = "root"
 dbse = "sqltodisc"
 port = 3306
 acmt = True
+
+token = "xXxXXxXxxxxXxxxXXxXxxxxxxXxxX"

@@ -1,9 +1,3 @@
-import discord
-from discord.ext import commands
-from rich.console import Console
-import pymysql
-import pymysql.cursors
-import config
 import time
 import asyncio
 import random
@@ -12,6 +6,16 @@ import requests
 import urllib
 import json
 
+import pymysql
+import pymysql.cursors
+
+import discord
+from discord.ext import commands
+
+import config
+
+from rich.console import Console
+
 # initialize the Console() class
 console = Console()
 
@@ -19,10 +23,7 @@ bot = commands.Bot(command_prefix='?')
 
 @bot.event
 async def on_ready():
-	
-	console.print(messageLogo, style = "blue")
-
-	messageDesc = f"""```
+	messageDesc = "```
            ▓█████▄  ██▓  ██████  ▄████▄   ▒█████   ██▀███  ▓█████▄             
            ▒██▀ ██▌▓██▒▒██    ▒ ▒██▀ ▀█  ▒██▒  ██▒▓██ ▒ ██▒▒██▀ ██▌            
            ░██   █▌▒██▒░ ▓██▄   ▒▓█    ▄ ▒██░  ██▒▓██ ░▄█ ▒░██   █▌            
@@ -87,31 +88,28 @@ async def on_ready():
              ▄███            ░▓███░        ░░░▓█      ░      
              █▓██            ░▓██▓          ░▒▒█░                ░
             ░█▒░              ░███          ░▓██░ ░          
-           ▒ █░               ▓███░        
+           ▒ █░               ▓███░                Create by Filth
 
-  Create by Filth
-	``` """	
-
-		
-	
+		   									
+	``` "
 	db = pymysql.connect(host=config.host, port=config.port, user=config.user, passwd=config.pswd, db=config.dbse, autocommit=config.acmt)
-	cursor = db.cursor()
-	print(' [!] Started to DM Ids with random pause\n')
-	
+
+	console.print(' [!] Started to DM Ids with random pause\n', style="green")
+
 	cursor1 = db.cursor()
 	cursor1.execute("select * from dm_users where robot='0' ORDER BY id DESC")
-	usersResult = cursor1.fetchall()
-    
+	usrsRslts = cursor1.fetchall()
+
 	indx = 0
-    
-	for user in usersResult:		
+
+	for user in usrsRslts:
 		member = await bot.fetch_user(user[1])
 		indx += 1
 		try:
 			await member.send(messageDesc)
-			console.print("User ID:", user[1],style="green")
+			console.print("User ID:", user[1],style="yellow")
 			console.print(member)
-			console.print("Total: ", indx, "/", len(usersResult), style="green")	
+			console.print("Total: ", indx, "/", len(usrsRslts), style="blue")
 			cursor1.execute(f"UPDATE users SET sent='1' WHERE uid='{user[1]}'")
 			time.sleep(random.randint(49, 55))
 		except Exception as e:
@@ -120,5 +118,5 @@ async def on_ready():
 			cursor1.execute(f"UPDATE users SET sent='2' WHERE uid='{user[1]}'")
 		
 	print(" [+] Done")
-#6213
-bot.run("[TokenHere]", bot = False)
+
+bot.run(config.token, bot = False)
