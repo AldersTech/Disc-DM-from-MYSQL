@@ -1,0 +1,9 @@
+{
+  "name": "Discord | DM from MySQL database",
+  "version": "1.0.0",
+  "description": "CodeInFilth setup a database that will be used to grab UID to send messages to too in using discord API.",
+  "main": "send.py",
+  "keywords": ["Discord", "Python", "Mass DM", "Advertise", "Selfbot"],
+  "author": "CodeInFilth",
+  "license": "MIT"
+}
